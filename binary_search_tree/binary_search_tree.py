@@ -58,24 +58,54 @@ class BinarySearchTree:
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node is None:
+            return
+        else:
+            self.in_order_print(node.left)
+            print(node.value)
+            self.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        #Use queue to store the node (fifo)
+        queue = Queue()
+        queue.enqueue(node)
+        while queue.size > 0:
+            #neighbors of the node will be visited in the order they were inserted
+            n = queue.dequeue()
+            print(n.value)
+            if n.left:
+                queue.enqueue(n.left)
+            if n.right:
+                queue.enqueue(n.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        #Use stack (LIFO) for storage 
+        stack = Stack()
+        # Push method to add to the stack
+        stack.push(node)
+        while stack.size > 0:
+            n = stack.pop()
+            print(n.value)
+            #Stack Adjacent nodes
+            if n.left:
+                stack.push(n.left)
+            if n.right:
+                stack.push(n.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
